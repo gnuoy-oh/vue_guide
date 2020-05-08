@@ -16,7 +16,7 @@
 
 - Vue.js Devtools
 
-### vue?
+## vue?
 
 - MVVM 패턴의 뷰모델(ViewModel) 레이어에 해당하는 화면(view)단 라이브러리
 
@@ -36,4 +36,68 @@
 
     - 문자열, 숫자가 바뀌었을 때 바로 데이터 바인딩을 사용해서 바로 화면에 반영한다.
 
-- 
+### 실행 방법
+
+- live server 돌리고 개발자 도구 > vue 탭으로 확인하면 된다.
+
+- Vue 인스턴스
+
+    - Vue 개발할 때 필수로 생성해야하는 코드이자, 단위!
+
+    ```
+    var vm = new Vue({
+    // 옵션
+    })
+    ```
+
+- 위와 같이 작성한 후, 개발자 도구 console > vm 을 치면 많은 Vue API(기능), 속성을 확인할 수 있다.
+ 
+### [Tip] 생성자 함수
+
+- 함수를 이용해서 instance를 생성하는 방법?
+    
+    - Vue에서 생성자 함수를 사용하는 방법은 new 생성자 함수를 생성하는 방법이다.
+
+    - 대문자로 선언 
+
+- 생성하는 방법
+
+    - 생성자 함수를 직접 작성해서 개체를 정의한다.
+
+    - new 키워드를 사용하여 개체의 인스턴스를 만든다.
+
+    ```
+    function car(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    // 아래와 같이 객체를 만들 수 있다.
+    mycar = new car("Eagle", "Talon TSi", 1993);
+    kenscar = new car("Nissan", "300ZX", 1992);
+    vpgscar = new car("Mazda", "Miata", 1990);
+    ```
+
+- 방법
+
+    - 객체 표기법을 사용해서 작성한다.
+
+    ```
+    var date = {
+        a: 1
+    };
+
+    var vm = new Vue({
+        data: data
+    })
+    ```
+
+### Vue Component
+
+- 화면의 영역을 영역별로 구분해서 관리하는 것
+
+    - header, side, content, footer 등
+
+- 장점: 재사용성을 올리기 위한 목적 
+

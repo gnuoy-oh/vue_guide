@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- 부모 component -->
+    <div id="app">
+        <!-- 하위, 자식 component -->
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        // ** 전역 컴포넌트 등록하는 방법 - 실제 서비스에서는 전역 컴포넌트를 사용할 일은 없다!
+        // Vue.component('컴포넌트 이름', 컴포넌트 내용)
+        // 실무에서는 대부분 플러그인이나 라이브러리 형태로 전역으로 사용해야하는 컴포넌트만 사용한다.
+        Vue.component('app-header', {
+            template: '<h1>Header</h1>'
+        })
+
+        Vue.component('app-content', {
+            template: '<ul><li>list</li><li>list</li><li>list</li></ul>'
+        })
+
+
+        new Vue({
+            // 인스턴스를 만들고, 이 안에 객체를 생성해서, el이라는 element에 해당하는 태그에 인스턴스를 붙힌다.
+            el: '#app',
+            // ** 지역 컴포넌트 등록하는 방법 - 객체 리터럴 방식으로 적용 
+            // 실무에서 거의 지역 컴포넌트를 사용한다.
+            // components - 다수의 컴포넌트가 붙기 때문에 s를 반드시 붙혀야 한다.
+            // 지역 컴퓨넌트를 사용하면 하단에 어떤 컴포넌트가 등록되었는지 컴포넌트 속성으로 알 수 있다.
+            components: {
+                // '키': '값' === '컴포넌트 이름': 컴포넌트 내용
+                'app-footer': {
+                    template: '<footer>footer</footer>'
+                }
+
+            }
+
+
+        })
+
+    </script>
+</body>
+</html>
