@@ -1,3 +1,7 @@
+# Vue Component
+
+- Component와 통신 방식 외 정리하였습니다.
+
 ## Vue Component란?
 
 - 화면의 영역을 영역별로 구분해서 관리하는 것
