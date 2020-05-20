@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <app-header v-bind: props(data) 속성 이름 = "상위 컴포넌트의 데이터 이름"></app-header> -->
+      <!-- props 속성 이름: app-header에 변수로 정의한다. -->
+      <!-- 위 컴포넌트의 데이터 이름: app-header 기준으로 상위 컴포넌트는 Root, Root의 데이터 이름은 Instance의 data에 선언해둔, message이다. -->
+      <app-header v-bind:propsdata = "message"></app-header>
+      <app-content v-bind:propsdata = "number"></app-content>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+    let appHeader = {
+      // Root Component(상위)에서 props(data)를 바꾸면, 화면에도 반영되어 실시간으로 변경된다.
+      template: "<h1>{{ propsdata }}</h1>",
+      //  props 속성 이름은, app-header에 변수로 정의한다.
+      props: ['propsdata']
+    };
+
+    let appContent = {
+      template: '<div>{{ propsdata }}</div>',
+      //  데이터는 고유의 유효범위가 있기 때문에, data 변수를 새롭게 정의한다.
+      props: ['propsdata']
+      
+    }
+
+    // Instance 생성
+    new Vue({
+      el: "#app",
+      components: {
+        'app-header':  appHeader ,
+        'app-content': appContent
+      },
+      // data 속성에서 message 생성
+      // Root Component에서 관리하는 data로, 여기서 속성(value)값이 바뀌었을 때, 
+      // 바뀐 data 속성은 하위 component로 내려가서 그대로 반영된다.
+      // 그리고 화면에도 다시 그려진다.
+      data: {
+        message: 'hi',
+        number: 10
+      }
+    });
+  </script>
+</html>
