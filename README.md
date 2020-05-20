@@ -16,7 +16,7 @@
 
 - Vue.js Devtools
 
-## Vue란?
+## Vue
 
 - MVVM 패턴의 뷰모델(ViewModel) 레이어에 해당하는 화면(view)단 라이브러리
 
