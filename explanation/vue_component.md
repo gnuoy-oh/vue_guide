@@ -72,7 +72,7 @@
 
   - 상위 컴포넌트 -> 하위 컴포넌트
 
-    - props(data)를 전달하여 데이터를 내려준다.s
+    - props(data)를 전달하여 데이터를 내려준다.
 
   - 하위 컴포넌트 -> 상위 컴포넌트
 
@@ -192,6 +192,31 @@
       number: 10
     }
   })
-  ``` 
 
-  ### 같은 component 레벨 간의 통신 방법
+  ```   
+
+<!-- 2020-05-31 -->
+
+### this
+
+- 해당 객체를 가리킨다.
+
+```
+let obj = {
+  num: 10,
+  getNumber: const = () => {
+    this.num + 1;
+  }
+}
+```
+
+## 동일 레벨에 있는 Component를 어떻게 통신을 할까.
+
+- playground/component-same-level.html에서 확인! 
+
+![component](../image/sameLevelComponent.png)
+![component](../image/sameLevelComponent2.png)
+![component](../image/sameLevelComponent3.png)
+
+
+<!-- 뷰 라우터 소개와 설치 부터 듣기 2020-05-31 -->
