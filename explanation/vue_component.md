@@ -273,6 +273,8 @@ new VueRouter({
 
 - 뷰에서 권고하는 HTTP 통신 라이브러리이다.
 
+- Promise based HTTP client for the browser and node.js
+
 - Promise 기반의 HTTP 통신 라이브러리 이자 node.js
 
   - js의 비동기 처리 패턴
@@ -363,7 +365,50 @@ new VueRouter({
     
   4. send the request
 
+### 전반적인 웹 서비스 구조 
 
+- 클라이언트와 서버간에 데이터를 주고받기 위한 규칙. 약속 
+
+![component](../image/http.png)
+![component](../image/clientserver.png)
+
+1. 브라우저(Client) -> 서버(Server)
+
+  - HTTP 요청(Request)
+
+2. 서버(Server) -> DB
+
+  - 요청에 의해서 서버에서 특정 백앤드 로직을 통해(Jave,nodeJS, 장고) DB에게 정보를 요청한다.
+
+  - DB에서 요청한 데이터를 서버에게 전달해준다.
+
+3. 서버(Server) -> 브라우저(Client)
+
+  - HTTP 응답(Response)
+
+### 크롬 개발자 도구 네트워크 패널
+
+- 클라이언트에서 HTTP 요청에서 axios로 보내보자.
+
+1. 네트워크 패널 -> XHR 탭을 클릭하고
+
+2. get user button을 클릭하면 name에 users/ 가 뜨고, headers 를 확인해보자
+
+  1. headers - http의 정보(응답, 부가적인 정보)를 담는다.
+
+    - General 
+
+      - Request URL 을 GET으로 보냈고 200코드(정상, 성공)로 데이터를 받았다.
+
+    - Responsee header
+
+    - Request Headers
+
+  2. Preview, Response
+
+    - GET으로 받아온 정보를 볼 수 있다.
+
+- [HTTP 프로토콜](https://joshua1988.github.io/web-development/http-part1/)
 
 
 

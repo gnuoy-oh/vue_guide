@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Axios</title>
 </head>
 <body>
   <div id="app">
     <button v-on:click="getData">get user</button>
+    <div>
+      {{ users }}
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -16,14 +19,19 @@
   <script>
     new Vue({
       el: '#app',
+      data: {
+        users: []
+      },
       methods: {
-        Data: function(){
+        getData: function(){
+          var vm = this;
           axios.get('https://jsonplaceholder.typicode.com/users/')
-          // 성공하면
+          // 유저 정보 받는 것을 성공하면
           .then(function(response){
             console.log(response);
+            vm.users=response.data;
           })
-          // 설치에 실패하면
+          // 유저 정보 받는 것을 실패하면
           .catch(function(error){
             console.log(error);
 
