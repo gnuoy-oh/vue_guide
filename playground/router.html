@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 1-1. router가 갖고있는 태그, view instance를 router instance에 연결해야지 사용할 수 있는 것 -->
+      <router-view></router-view> 
+      <!-- 2-1. router-link 사용자에게는 url 이동할 수 있는 화면에서 링크를 제공해줘야 한다. <a href=""> 형태로 나타난다. -->
+      <!-- 라우터에서 페이지 이동을 위해 사용하는 router-link<a href="/Login"></a> -->
+      <router-link to="/Login">Login</router-link>
+      <router-link to="/Main">Main</router-link>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- vue router 가져오기 -->
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+  <script>
+
+    var LoginComponent = {
+      template: '<div>Login</div>'
+    }
+
+    var MainComponent = {
+      template: '<div>Main</div>'
+    }
+
+    // instance 방식으로 라우터를 뽑아올 수 있다.
+    var Router = new VueRouter({
+      // 1. routes 속성 선언 
+      // -> 페이지의 라우팅 정보가 들어간다. 
+      // (어떤 url로 이동했을 때 어떤 페이지로 뿌려질지에 대한 정보가, routes 속성에 배열로 담긴다. )
+      // 배열 안에 페이지의 갯수 만큼 객체가 필요하다.
+      routes: [
+        // 로그인 페이지 정보 -> LoginComponent
+        {
+          // 페이지의 url Key: value
+          path: '/login',
+          // 해당 url에서 표시될 컴포넌트 Key: value
+          component: LoginComponent
+        },
+        // 메엔 페이지 정보 -> MainComponent 
+        {
+          path: '/main',
+          component: MainComponent
+        }
+      ]
+    });
+
+    new Vue({
+      // app id 에 instance를 생성했다.
+      el: "#app",
+      // app 안에 범위가 유효하다.
+      // router methods 속성이다. -> 위 새로 선언한 Router 를 연결하고, 속성을 연결한다.
+      router: Router
+
+    });
+  </script>
+</html>

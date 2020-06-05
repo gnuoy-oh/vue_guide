@@ -10,16 +10,16 @@
 
   - 장점: 재사용성을 올리기 위한 목적 
 
-  ```
-  // 부모 Component
-  <div id="app">
+    ```
+    // 부모 Component
+    <div id="app">
 
-    // 자식 Component
-    <app-header></app-header>
-    <app-content></app-content>
-    
-  </div>
-  ```
+      // 자식 Component
+      <app-header></app-header>
+      <app-content></app-content>
+      
+    </div>
+    ```
 
 ### 전역 Component
 
@@ -29,14 +29,14 @@
 
   - 형태
 
-  ```
-  Vue.component('컴포넌트 이름', 컴포넌트 내용) 
+    ```
+    Vue.component('컴포넌트 이름', 컴포넌트 내용) 
 
-  <!-- 예시 -->
-  Vue.component('app-header', {
-    template:: "<h1>Header</h1>"
-  })
-  ```
+    <!-- 예시 -->
+    Vue.component('app-header', {
+      template:: "<h1>Header</h1>"
+    })
+    ```
 
 ### 지역 Component
 
@@ -48,23 +48,23 @@
 
   - 형태
 
-  ```
-  new Vue({
-    key: {
-      '키 === 컴포넌트 이름 ': '값 === 컴포넌트 내용'
-    }
-  })
-
-  <!-- 예시 -->
-  new Vue: ({
-    el: '#app',
-    components: {
-      'app-header': {
-        template: '<h1>header</h1>'
+    ```
+    new Vue({
+      key: {
+        '키 === 컴포넌트 이름 ': '값 === 컴포넌트 내용'
       }
-    }
-  })
-  ```
+    })
+
+    <!-- 예시 -->
+    new Vue: ({
+      el: '#app',
+      components: {
+        'app-header': {
+          template: '<h1>header</h1>'
+        }
+      }
+    })
+    ```
 
 ## Vue Component 통신 방식
 
@@ -195,8 +195,6 @@
 
   ```   
 
-<!-- 2020-05-31 -->
-
 ### this
 
 - 해당 객체를 가리킨다.
@@ -219,4 +217,154 @@ let obj = {
 ![component](../image/sameLevelComponent3.png)
 
 
-<!-- 뷰 라우터 소개와 설치 부터 듣기 2020-05-31 -->
+## Vue Router(라우터)
+
+- 페이지를 이동할 때 사용하는 Vue 공식 라이브러리이자, 기능이다.
+
+- 뷰 라이브러리를 이용해서 싱글 페이지 애플리케이션을 구현할 때 사용하는 라이브러리이다.
+
+- [중급 라우터](https://joshua1988.github.io/web-development/vuejs/vue-router-navigation-guards/)
+
+- CDN 방식이나, npm 방식으로 설치한다.
+
+```
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+```
+
+### 뷰 라우터 등록
+
+```
+<!-- router Instance 생성 -->
+var Router = new VueRouter({
+  // 라우터 옵션
+})
+
+
+<!-- Instance에 router Instance 등록 -->
+new Vue ({
+  el: '#app',
+
+  router: Router
+})
+```
+### 뷰 라우터 옵션
+
+- routes: 라우팅 할 URL 과, 컴포넌트 값을 지정한다.
+
+```
+new VueRouter({
+  <!-- URL의 해쉬 값 제거 속성(#) -->
+  mode: 'history',
+  <!-- 배열 형태로 담고, 객체 형태로 나열한다. -->
+  routes: [
+    {
+      path: '/login',
+      component: LoginComponent
+    },
+    {
+      path: 'main',
+      component: MainComponent
+    }
+  ]
+})
+```
+
+## HTTP 라이브러리와 Ajax 그리고 Vue Resource
+
+- 뷰에서 권고하는 HTTP 통신 라이브러리이다.
+
+- Promise 기반의 HTTP 통신 라이브러리 이자 node.js
+
+  - js의 비동기 처리 패턴
+
+    1. [callback](https://joshua1988.github.io/web-development/javascript/javascript-asynchronous-operation/)
+
+    2. [promise](https://joshua1988.github.io/web-development/javascript/promise-for-beginners/)
+
+    3. promise + generator
+
+    4. [async & await](https://joshua1988.github.io/web-development/javascript/js-async-await/)
+
+- 문서화가 잘 되어있고 다양한 API를 내장하고 있다.
+
+- https://github.com/axios/axios
+
+### Vue Resource (axios 사용 이전)
+
+- pagekit사의 Vuejs에서 활용할 수 있는 라이브러리이고 오래 됨
+
+- [Vue-Resource](https://github.com/pagekit/vue-resource)
+
+### Ajax
+
+- Javascript 라이브러리 중 하나이며, 비동기적인 웹 애플리케이션의 제작을 할 때 사용한다.
+
+- 브라우저가 가지고 있는 CMLHttpReauest 객체를 이용해서 전체 페이지를 새로 고치지 않고, 페이지의 일부만을 위한 데이터를 로드하는 기법으로, Javascript를 사용한 비동기 통신, 클라이언트와 서버간에 XML 데이터를 주고받는 기술이다.
+
+- 즉, 자바스크립트를 통해서 서버에 데이터를 요청하는 것이다.
+
+  - 비동기 방식이란? 
+
+    - 기존 페이지의 리로드의 경우 전체 리소스를 다 불러와야 하는데 (이미지, 스크립트, 기타 코드 등) 이럴 경우, 불필요한 리소스 낭비가 발생하게 되지만, 비동기식 방식을 이용할 경우 필요한 부분만 불러와 사용할 수 있으므로 속도가 빠르다는 큰 장점이 있다. 
+
+    - Jquery.ajax -> 데이터를 호출하고, 받아오고, 수정하는 등등의 일을 한다.
+
+- **Ajax로 할 수 있는 것**
+
+  - 클라이언트에서 서버로 데이터를 요청하고, 그에 대한 결과를 돌려받을 수 있다.
+
+  - 클라이언트? 서버에서 정보를 가져와서 사용자에게 보여줄 수 있고, 사용자와 상호작용을 할 수 있는 소프트웨어
+
+  - 서버? 네트워크 상에서 접근할 수 있는 프로그램으로 어떤 자료들에 대한 관리나 접근을 제어해주는 프로그램
+
+- **Ajax 를 사용하는 이유**
+
+  - 단순하게 무언가를 부르거나 데이터를 조회하고 싶을 경우, 페이지 전체를 새로고침하지 않기 위해서 사용한다고 볼 수 있다.
+
+  - Ajax는 HTML 페이지 전체가 아닌, 일부분만 갱신할 수 있도록 XMLHttpRequest 객체를 통해 서버에 request 한다. 이 경우 JSON이나 XML 형태로 필요한 데이터만 받아 갱신하기 때문에 그만큼의 자원과 시간을 아낄 수 있다.
+
+- **Ajax 장점**
+
+  - 웹페이지의 속도 향상
+  
+  - 서버의 처리가 완료될 때까지 기다리지 않고 처리가 가능
+
+  - 서버에서 DATA만 전송하면 되므로 전체적인 코딩의 양이 줄어든다.
+
+  - 기존 웹에서는 불가능했던 다양한 UI가 가능하다. (Flickr의 경우, 사진의 제목이나 태그를 페이지의 리로드 없이 수정할 수 있다.)
+
+- **Ajax 단점**
+
+  - 히스토리 관리가 되지 않는다.
+
+  - 페이지 이동없는 통신으로 인한 보안상의 문제가 있다.
+
+  - Ajax를 쓸 수 없는 브라우저 이슈가 있음
+
+- **Ajax 진행 과정**
+
+  1. XMLHttpRequest Object를 만든다.
+
+    - request를 보낼 준비를 브라우저에게 시키는 과정
+    
+    - 이것을 위해서 필요한 method를 갖춘 object가 필요함
+  
+  2. callback 함수를 만든다.
+    
+    - 서버에서 response가 왔을 때 실행시키는 함수
+    
+    - HTML 페이지를 업데이트 함
+    
+  3. Open a request
+    
+    - 서버에서 response가 왔을 때 실행시키는 함수
+    
+    - HTML 페이지를 업데이트 함
+    
+  4. send the request
+
+
+
+
+
+
