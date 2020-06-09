@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    {{ num }}
+    {{ doubleNum }}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+    // new Instance
+    new Vue({
+      el: '#app',
+
+      // data -> num 선언
+      data: {
+        num: 10
+      },
+
+      computed: {
+        // data 속성 중 num이라는 속성 * 2를 출력한다.
+        // data의 의존성. 기준이 되는 값이 data 의 num이다.
+        // 단순한 값의 계산, validation 값을 받아서 계산하는 개념
+        doubleNum: function(){
+          return this.num * 2;
+        }
+      },
+
+      // num의 값이 바뀌었을 때 
+      watch: {
+        num: function(newValue, oldValue){
+          this.fetchUserByNumber(newValue);
+        }
+      },
+
+      methods: {
+        fetchUserByNumber: function(num){
+          axios.get(num)
+
+        }
+      }
+
+    })
+  </script>
+  
+</body>
+</html>

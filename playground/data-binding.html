@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+   <!-- Vue 디렉티브 -> v- 가 붙는 특수한 속성들!!  -->
+  <div id="app">
+    <!-- 하단  -->
+    <!-- 아래 데이터 속성인 uuid를 바인딩해서 id값을 지정해 줄 것이다! -->
+    <p v-bind:id="uuid" v-bind:class="name">{{number}}</p>
+    <!-- 아래와 같이 보여질 것이다. -->
+    <!-- === <p id="abc1234" class="text-blue">{{number}}</p> -->
+    <p>{{doubleNumber}}</p>
+    <!-- 로그인 중일 경우 나타나는 텍스트 -->
+    <div v-if="loading">
+      Loading...
+    </div>
+    <!-- 유저가 로그인하고 나면 실제로 로그인 상태 표시를 해준다. -->
+    <div v-else=>
+      test user has brrn logged in
+    </div>
+    <!-- DOM은 그대로 있고, display: none 의 스타일이 먹히는 것!!! -->
+    <div v-show="loading">
+      loading...
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+
+    // 데이터 바인딩
+    new Vue({
+      el: '#app',
+      data: {
+        // console에서 Vue에 해당 객체 값을 바꾸면 바로 재갱신 된다.
+        // reactivity
+        number: 10,
+        // uuid라는 이름의 데이터 속성으로 관리되고 있다. 이 uuid를 특정 태그의 id로 연결하고 싶다면, v-bind를 사용한다.
+        // console -> Vue에 가서 id값을 변경하면 실시간으로 변경된다!
+        uuid: 'abc1234',
+        name: 'text-blue',
+        loading: true
+      },
+      // 위 number값이 이미 정의되어 있기 때문에, 위 객체 값을 반영해서 doubleNumber를 영향을 줄 것이면 computed를 사용한다.
+      // Number가 바뀌었을 때, doubleNumber도 동시에 변경된다!!
+      computed: {
+        doubleNumber: function(){
+          return this.number * 2;
+        }
+      },
+
+    })
+
+
+
+  </script>
+</body>
+</html>

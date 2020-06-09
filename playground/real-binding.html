@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- input 박스를 만들고 입력된 값을 p태그에 출력한다. -->
+  <div id="app">
+    <!-- input v-model을 사용해서 실시간으로 input에 들어가는 value 값을 받아온다.-->
+    <input type="text" v-model="message" placeholder="입력하세요"/>
+    <!-- 이중 중괄호로 message 값을 실시간으로 반영한다. -->
+    <p>
+      {{ message }}
+    </p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: ''
+      }
+
+    })
+  </script>
+</body>
+</html>
