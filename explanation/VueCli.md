@@ -4,6 +4,7 @@
 
 - Vue.js 개발을 위한 시스템으로, Vue.js Core에서 공식으로 제공하는 CLI 이다. Vue CLI는 애플리케이션 개발에 집중할 수 있도록 프로젝트의 구성을 도와주는 역할을 하며, Vue 생태계에서 표준 툴 기준을 목표로 하고 있다.
 
+
 - 윈도우에서는 Command, 맥에서는 Terminal에서 타이핑으로 명령어를 입력하여 원하는 바를 실행 시키는 도구를 말한다. Vue-CLI는 내부적으로 웹팩을 활용한다. 
 
 - Vue CLI에서 할 수 있는 것
@@ -91,6 +92,39 @@ npm run serve
 
 - 하나의 파일 안에 HTML, Script, CSS를 모두 관리하겠다!
 
+### 별도의 컴포넌트를 생성해서, props + event를 구현해보자.
+
+1. components 폴더에서 component 의 내용을 정의한다.
+
+2. App.vue에서 AppHeader를 import 해온다.
+
+```
+import AppHeader from './components/AppHeader.vue'
+```
+
+3. import해온 AppHeader를 인스턴스 내부에 선언을 해준다.
+
+```
+export default({
+  components: {
+    'app-header': AppHeader
+  }
+})
+```
+
+4. 선언해준 컴포넌트를 template tag 안에 넣어준다!
+
+```
+<template>
+  <div>
+    <app-header></app-header>
+  </div>
+</template>
+```
+
+### wewbpack 
+
+- index.html 에서 
 
 ### 참고
 
