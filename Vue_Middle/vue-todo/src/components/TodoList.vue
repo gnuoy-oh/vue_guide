@@ -3,7 +3,7 @@
     <ul>
       <!-- todoItem, index -> v-for가 몇 개 이건 list item 의 index 순서가 자동으로 지정된다. -->
       <li v-for="(todoItem , index) in todoItmes" v-bind:key="todoItem.item" class="shadow">
-        <!-- complted false -> class 제거 -->
+        <!-- complted false일 경우, class 제거하고 true일 경우 class-->
         <i class="fas fa-check checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
         <!-- html 속성에 동적인 값을 부여한다. parse면 textCompleted 이 사라지고, true면 textCompleted 추가된다. -->
         <span v-bind:class="{textCompleted: todoItem.completed}">
@@ -50,15 +50,15 @@ export default{
   // 생성되는 시점에 안의 logic이 실행된다.
   //   created: function({}) Vue 라이프 사이클에서 사용하는 것으로 Instance가 생성되자마자, 안에 logic이 실행된다.
   created() {
-    console.log('created')
-    // localstorage의 갯수가 1개 이상일 경우,
+    // console.log('created')
     if(localStorage.length > 0){
       for(var i = 0; i < localStorage.length; i++){
-        console.log(localStorage.key(i));
+        // console.log(localStorage.key(i));
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          // object로 돌리기 위헤 JSON.parse를 사용한다
-          // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+          // 문자열을 object로 돌리기 위헤 JSON.parse를 사용한다
+          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
           this.todoItmes.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+          console.log(this.todoItmes)
         }
       }
     }
