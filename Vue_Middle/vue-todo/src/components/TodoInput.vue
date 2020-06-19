@@ -23,14 +23,8 @@ export default{
     addTodo: function(){
       // addTodo (엔터, 클릭) input 값이 있으면 다음을 실행한다.
       if(this.newTodoItem !== ''){
-        // 기존에 text 2개 값 + text가 체크 됐는지 안됐는지 boolean 값을 넣어주는 것.
-        var obj = {completed: false, item: this.newTodoItem};
-        console.log(this.newTodoItem);
-        // 저장하는 로직을 넣어줘서, Input 의 text를 비워준다.
-        // localStorage.setItem('key', 'value')
-        // 자바스크립트 객체로 들어갔기 때문에 value 값을 확인할 수 없다.
-        // JSON.stringfy(obj) -> 자바스크립트 객체(Object)를 문자열(string)으로 변환
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        // this.$emit('event이름', this.newTodoitem)
+        this.$emit('addTodoItem', this.newTodoItem)
         this.clearInput();
       }
     },
