@@ -21,14 +21,22 @@ export default{
   methods: {
     // LocalStorage 
     addTodo: function(){
-      // this -> 현재 Instance (===TodoInput 자체를 가리킨다.)
-      console.log(this.newTodoItem);
-      // 저장하는 로직을 넣어줘서, Input 의 text를 비워준다.
-      // 로컬 스토리지의 setItem을 사용해서 로컬에 저장한다.
-      // 개발자 도구 -> Application -> Local Storage 에서 확인 가능
-      // localStorage.setItem('key', 'value')
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput();
+      // addTodo (엔터, 클릭) input 값이 있어야 한다.
+      if(this.newTodoItem !== ''){
+        // 기존에 text 2개 값 + text가 체크 됐는지 안됐는지 boolean 값을 넣어주는 것.
+        var obj = {completed: false, item: this.newTodoItem};
+        // this -> 현재 Instance (===TodoInput 자체를 가리킨다.)
+        console.log(this.newTodoItem);
+        // 저장하는 로직을 넣어줘서, Input 의 text를 비워준다.
+        // 로컬 스토리지의 setItem을 사용해서 로컬에 저장한다.
+        // 개발자 도구 -> Application -> Local Storage 에서 확인 가능
+        // localStorage.setItem('key', 'value')
+        // 자바스크립트 객체로 들어갔기 때문에 value 값을 확인할 수 없다.
+        // localStorage.setItem(this.newTodoItem, obj);
+        // JSON.stringfy(obj) -> 자바스크립트 객체를 string으로 변환해주는 것 
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.clearInput();
+      }
     },
   // Input Clear
     clearInput: function(){
