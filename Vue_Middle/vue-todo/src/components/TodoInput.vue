@@ -1,45 +1,44 @@
 <template>
   <div class="inputBox shadow">
-    <!-- v-model: input에 입력된 값이 instance 안에 바로바로 mapping하는 역할 -->
+    <!-- ** v-model: input form 에 입력된 text 값이 vue instance 안에 바로바로 mapping하는 역할을 한다. -->
     <!-- Instance에서 data 변경이 서로 동기화가 되는 것을 확인할 수 있다. -->
     <!-- === two way binding -->
-    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
+    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addToDo" />
     <!-- <button v-on:click="addTodo">add</button> -->
-    <span class="addContainer" v-on:click="addTodo">
-      <i class="fas fa-plus addBtn" aria-hidden="true"></i>
+    <span class="addContainer" v-on:click="addToDo">
+      <i class="fas fa-plus addBtn"></i>
     </span>
   </div>
 </template>
 
 <script>
-export default{
-  data: function(){
+export default {
+  data() {
     return {
-      newTodoItem: ""
-    }
+      newTodoItem: "",
+    };
   },
   methods: {
-    // LocalStorage 
-    addTodo: function(){
-      // addTodo (엔터, 클릭) input 값이 있으면 다음을 실행한다.
-      if(this.newTodoItem !== ''){
-        // this.$emit('event이름', this.newTodoitem)
-        this.$emit('addTodoItem', this.newTodoItem)
+    // local storage에 key와 value를 담는다.
+    addToDo() {
+      if (this.newTodoItem !== "") {
+        console.log(this.newTodoItem);
+        // check가 됐는지 안됐는지 Boolean: completed
+        var obj = { completed: false, item: this.newTodoItem };
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
         this.clearInput();
       }
     },
-  // Input Clear
-    clearInput: function(){
-      this.newTodoItem='';
-    }
-
-  }
-
-}
+    // input value 값을 지운다.
+    clearInput() {
+      this.newTodoItem = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
-input{
+input {
   width: 80%;
   height: 45px;
 }
@@ -58,7 +57,7 @@ input:focus {
 }
 .addContainer {
   float: right;
-  background: linear-gradient(to right, #6478FB, #8763FB);
+  background: linear-gradient(to right, #6478fb, #8763fb);
   display: block;
   width: 3rem;
   height: 100%;

@@ -1,18 +1,18 @@
 <template>
   <div>
     <ul>
-      <!-- todoItem, index -> v-for가 몇 개 이건 list item 의 index 순서가 자동으로 지정된다. -->
-      <li v-for="(todoItem , index) in propsdata" v-bind:key="todoItem.item" class="shadow">
-        <!-- complted false일 경우, class 제거하고 true일 경우 class-->
-        <i class="fas fa-check checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
-        <!-- html 속성에 동적인 값을 부여한다. parse면 textCompleted 이 사라지고, true면 textCompleted 추가된다. -->
-        <span v-bind:class="{textCompleted: todoItem.completed}">
-          {{ todoItem.item }}
-        </span>
-        <!-- // 어느 휴지통을 클릭해도 반응한다. 
-             // 혹, 첫번째 li를 클릭했을 때 li 의 첫번째만 삭제해줄 수 없나? -->
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
-          <i class="fas fa-trash-alt addBtn"></i>
+      <!-- v-for를 사용해서, todoItems에 담아둔 값을 전부 다 불러와 보여준다. -->
+      <!-- v-for를 사용하면, v-bind:key를 사용해서 어떤 값을 넣어줄 지 명시적으로 작성해줘야 한다. -->
+      <!-- index는 각각 배열이 위치하는 순서 값을 나타낸다. (0부터 시작) -->
+      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+        <i
+          class="fas fa-check checkBtn"
+          v-bind:class="{checkBtncompleted: todoItem.completed}"
+          v-on:click="toggleComplete(todoItem, index)"
+        ></i>
+        <span v-bind:class="{textcompleted: todoItem.completed}">{{ todoItem.item }}</span>
+        <span class="removeBtn" v-on:click="romoveTodo(todoItem, index)">
+          <i class="fas fa-trash"></i>
         </span>
       </li>
     </ul>
@@ -20,30 +20,44 @@
 </template>
 
 <script>
-// TodoInput Component로컬스토리지에서 저장한 내용을 List에서 보여주는 기능을 구현한다.
-export default{
-  props: ['propsdata'],
+export default {
+  data() {
+    return {
+      todoItems: [],
+    };
+  },
   methods: {
-    removeTodo: function(todoItem, index){
+    // localStorage의 키 값을 삭제
+    romoveTodo(todoItem, index) {
+      // todoItem, index -> key, localstorage 순서 값
       console.log(todoItem, index);
-      // localStorage의 key 를 제거한다.
       localStorage.removeItem(todoItem);
-      // script 영역에 있는 li 리스트도 삭제한다.
-      this.todoItmes.splice(index, 1);
+      this.todoItems.splice(index, 1);
     },
-
-    toggleComplete: function(todoItem, index){
-      console.log(todoItem, index);
-      // 설정값 바꿈
+    toggleComplete(todoItem, index) {
       todoItem.completed = !todoItem.completed;
-      // 업데이트 기능이 없기 때문에 바꾼 설정값을 지우고. 로컬 스토리지의 데이터를 갱신
+      // 로컬 스토리지의 데이터 갱신
       localStorage.removeItem(todoItem.item);
-      // 바뀐 내용을 다시 저장한다.
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      console.log(todoItem, index);
+    },
+  },
+  // lifeCycle의 개념으로, 웹 페이지가 열리는 순간 created 하위 로직들이 실행되는 것
+  created() {
+    console.log("createds");
+    // localStorage의 갯수가 0 이상일 때, for 문을 돌린다.
+    if (localStorage.length > 0) {
+      for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
+          // localStorage.getItem(localStorage(i));
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          );
+        }
+      }
     }
   },
-
-}
+};
 </script>
 
 <style scoped>
@@ -68,24 +82,15 @@ li {
   color: #62acde;
   margin-right: 5px;
 }
-.checkBtnCompleted {
+.checkBtncompleted {
   color: #b3adad;
 }
-.textCompleted {
+.textcompleted {
   text-decoration: line-through;
   color: #b3adad;
 }
 .removeBtn {
   margin-left: auto;
   color: #de4343;
-}
-
-/* transition css */
-.list-enter-active, .list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
 }
 </style>

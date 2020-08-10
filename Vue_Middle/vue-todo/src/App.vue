@@ -2,9 +2,9 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <!-- v-on:하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명" -->
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
+    <TodoInput></TodoInput>
     <!-- v-bind: 내려보낼 props 속성 이름 = "상위 컴포넌트의 데이터 이름"   -->
-    <TodoList v-bind:propsdata="todoItems"></TodoList>
+    <TodoList></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
