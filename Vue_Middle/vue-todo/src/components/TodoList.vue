@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul">
       <!-- v-for를 사용해서, todoItems에 담아둔 값을 전부 다 불러와 보여준다. -->
       <!-- v-for를 사용하면, v-bind:key를 사용해서 어떤 값을 넣어줄 지 명시적으로 작성해줘야 한다. -->
       <!-- index는 각각 배열이 위치하는 순서 값을 나타낸다. (0부터 시작) -->
@@ -15,7 +15,7 @@
           <i class="fas fa-trash"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -71,5 +71,13 @@ li {
 .removeBtn {
   margin-left: auto;
   color: #de4343;
+}
+/* list transition */
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
