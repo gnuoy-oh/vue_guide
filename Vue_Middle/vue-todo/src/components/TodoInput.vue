@@ -3,7 +3,7 @@
     <!-- ** v-model: input form 에 입력된 text 값이 vue instance 안에 바로바로 mapping하는 역할을 한다. -->
     <!-- Instance에서 data 변경이 서로 동기화가 되는 것을 확인할 수 있다. -->
     <!-- === two way binding -->
-    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addToDo" />
+     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addToDo" />
     <!-- <button v-on:click="addTodo">add</button> -->
     <span class="addContainer" v-on:click="addToDo">
       <i class="fas fa-plus addBtn"></i>
@@ -23,9 +23,9 @@ export default {
     addToDo() {
       if (this.newTodoItem !== "") {
         console.log(this.newTodoItem);
-        // check가 됐는지 안됐는지 Boolean: completed
-        var obj = { completed: false, item: this.newTodoItem };
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        // this.$emit('이벤트 이름', 인자1, 인자2 ...) 
+        // v-on 이벤트가 발생했을 경우. addItem이라는 이벤트가 발생하고 this.newTodoItem인자를 상위로 보내준다.($emit)
+         this.$emit('addItem', this.newTodoItem);
         this.clearInput();
       }
     },
