@@ -1,6 +1,6 @@
 # HTTP 프로토콜
 
-![protocol](../image/http-full-structure.png)
+![protocol](image/http-full-structure.png)
 
 ## HTTP 프로토콜 이란?
 
@@ -20,7 +20,7 @@
 
 - HTTP 프로토콜로 데이터를 주고받기 위해서는 아래와 같이 요청을(Request) 보내고 응답(Response)을 받아야 한다.
 
-![image](../image/request-response.png)
+![image](image/request-response.png)
 
 - 클라이언트란 요청을 보내는 쪽을 의미하며, 일반적 웹 관점에서는 브라우저를 의미한다. 
 

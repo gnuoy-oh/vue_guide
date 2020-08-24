@@ -4,7 +4,7 @@
 
 - Vue Instance가 생성된 후 우리 눈에 보여지고, 사라지기 까지의 단계를 일컫는 말이다.
 
-![lifecycle](../image/lifecycle.png)
+![lifecycle](image/lifecycle.png)
 
 - 크게 생성(create)되고, DOM에 부착(mount)되고, 업데이트(update)되며, 없어지는(destroy) 4가지 과정을 거치게 된다. 이 과정에서 Vue는 각각의 단계에서 Hook을 사용할 수 있도록 API를 제공한다.
 

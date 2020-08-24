@@ -721,12 +721,12 @@ props: {
 - 속성이 여러개인 컴포넌트를 선언하여 사용 할 경우, 속성 별로 개행 처리 하여 의미를 명확하게 한다.
 ```md
 // bad
-<img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
+<img src="https://vuejs.orgimages/logo.png" alt="Vue Logo">
 <MyComponent foo="a" bar="b" baz="c"/>
 
 // good
 <img
-  src="https://vuejs.org/images/logo.png"
+  src="https://vuejs.orgimages/logo.png"
   alt="Vue Logo"
 >
 <MyComponent
