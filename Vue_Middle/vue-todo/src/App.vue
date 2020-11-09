@@ -34,7 +34,7 @@ export default {
     // TodoInput에서 받아온 this.newTodoItem === todoItem
     addOneItem(todoItem) {
       // 기존에 text 2개 값 + text가 체크 됐는지 안됐는지 boolean 값을 넣어주는 것.
-      var obj = { completed: false, item: todoItem };
+      const obj = { completed: false, item: todoItem };
       console.log(this.newTodoItem);
       // 저장하는 로직을 넣어줘서, Input 의 text를 비워준다.
       // localStorage.setItem('key', 'value')
@@ -43,7 +43,7 @@ export default {
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem: function (todoItem, index) {
+    removeOneItem(todoItem, index) {
       console.log("hoho");
       this.todoItems.splice(index, 1);
       localStorage.removeItem(todoItem.item);
@@ -61,11 +61,11 @@ export default {
     }
   },
   // lifeCycle의 개념으로, 웹 페이지가 열리는 순간 created 하위 로직들이 실행되는 것
-  created: function () {
+  created() {
     console.log("created");
     // localStorage의 갯수가 0 이상일 때, for 문을 돌린다.
     if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
+      for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
           this.todoItems.push(
             JSON.parse(localStorage.getItem(localStorage.key(i)))
@@ -76,10 +76,10 @@ export default {
   },
   components: {
     // 컴포넌트 태그명: 컴포넌트 내용
-    TodoHeader: TodoHeader,
-    TodoInput: TodoInput,
-    TodoList: TodoList,
-    TodoFooter: TodoFooter,
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter,
   },
 };
 </script>
