@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- element 선언하면 app 내부에 뷰의 기능과 속성을 사용할 수 있다. -->
+        {{message}}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // app 이라는 tag를 찾아서 instance를 붙이겠다.
+        // #app 안에서 뷰의 기능과 속성들이 유효해진다.
+        // 때문에 el(element)룰 번드시 지정해야한다.
+        // 다음 
+
+    
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'hi'
+            },
+            method: {
+                
+            }
+        });
+    </script>
+</body>
+</html>

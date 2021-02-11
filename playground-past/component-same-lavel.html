@@ -1,0 +1,62 @@
+<!-- 2020-05-31 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 1. Root -> Instance 생성 -->
+  <div id="app">
+    <!-- 9. v-bind: props 속성 이름 = "상위 컴포넌트 데이터의 이름-> num" -->
+    <app-header v-bind:propsdata ="num"></app-header>
+    <!-- 7. v-on:pass 이벤트를 받아서, 상위 컴포넌트(Root)에 메소드 실행한다. -->
+    <app-content v-on:pass="deleverNum"></app-content>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+// 4. 컴포넌트 변수 생성
+    let appHeader = {
+      template: '<div>header</div>',
+      //  10. props 생성 
+      // 11. 해당 라이브 페이지에서 잘 받아왔는지 확인해본다.
+      props: ['propsdata']
+
+    }
+// 5. button click event 생성과 해당 메소드 생성
+    let appContent = {
+      template: '<div>content<button v-on:click="passNum">pass</button></div>',
+      methods: {
+        passNum: function(){
+          this.$emit('pass', 10);
+        }
+      }
+    }
+
+// 2. Vue Instance 생성
+    new Vue({
+      el: '#app',
+      // 3. 컴포넌트 생성
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      // 6. root에 num 숫자 데이터 생성
+      data: {
+        num: 0
+      },
+      // 8. 메소드 생성하고, $emit 의 10 을 받아온다. -> value
+      methods: {
+        deleverNum: function(value){
+          this.num = value;
+        }
+
+      }
+
+    })
+  </script>
+</body>
+</html>
