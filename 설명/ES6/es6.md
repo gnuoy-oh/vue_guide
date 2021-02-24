@@ -129,10 +129,105 @@ function f(){
 
 ## Arrow Function
 
+- 함수를 정의할 때 function을 사용하지 않고, => 으로 대체한다.
 
+- 흔히 사용하는 콜백함수의 문법을 간결화 한 것
+
+~~~
+// ES5
+var sum = function(a, b){
+  return a + b;
+}
+
+// ES6
+var sun = (a, b) => {
+  return a + b;
+}
+
+// ES5 
+var arr = ["a", "b", "c"];
+arr.forEach(function(value){
+  console.log(value); // a, b, c
+})
+
+//ES6
+var arr = ["a", "b", "c"];
+arr.forEach(value => console.log(value)); //a, b, c
+~~~
 
 ## Enhanced Object Literals
 
+- 향상된 객체 리터럴
+
+  - 객체의 속성을 메서드로 사용할 때, function 예약어를 생략하고 생성이 가능하다.
+
+  ~~~
+  var dictionary = {
+    words: 100,
+
+    // ES5
+    lookup: function(){
+      console.log("find words");
+    },
+
+    // ES6
+    lookup(){
+      console.log("find words");
+    }
+  }
+  ~~~
+
+- 객체의 속성명과 값 명이 동일할 때 아래와 같이 축약 가능
+
+  ~~~
+  var figures = 10;
+
+  var dictionary = {
+    // figures: figures,
+    figures
+  }
+  ~~~
+
 ## Modules 
 
-- 
+- 특정 기능을 수행하는 하나의 단위. 덩어리. 묶음!
+
+  - 재사용성이 뛰어난 기능들을 묶어서 필요할 때 사용하려는 목적으로 쓰인다.
+
+- 자바스크립트 module 로더 라이브러리 (AMD, Common JS)기능을 js 언어 자체에서 지원한다.
+
+- 호출되기 전까지는 코드 실행과 동작 하지 않는 특징이 있다.
+
+~~~
+// lib/math.js
+export function sum(x, y){
+  return x + y;
+}
+
+export var pi = 3.141593;
+
+// main.js
+import { sum } from 'libs/math.js'
+sum(1, 2);
+~~~
+
+- vue.js 에서 사용하는 default export
+
+- script 부분에서 1개의 파일에서 1개의 export만 할 수 있다.
+
+~~~
+// utils.js
+export default function (x) {
+  return console.log(x);
+}
+
+// main.js
+import { util } from 'util.js';
+console.log(util); // function (x) {return console.log(x);}
+util("hi");
+
+// app.js
+import log from 'utils.js';
+console.log(log);
+log("hi");
+ ~~~

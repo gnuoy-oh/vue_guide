@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <app-header v-bind:propsdata="num"></app-header>
+    <app-content v-on:pass="deliverNum"></app-content>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script>
+    var appHeader = {
+      template: '<div>Header</div>',
+      props: ['propsdata']
+    }
+
+    var appContent = {
+      template: '<div>Content <button v-on:click="passNumber">pass</button></div>',
+      methods: {
+        passNumber: function(){
+          console.log('Click');
+          this.$emit('pass', 10)
+
+        }
+      }
+    }
+
+    new Vue({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      data: {
+        num : 0
+      },
+      methods: {
+        // 하위 AppContent의 10 인자를 value로 암묵적으로 받아온다.
+        deliverNum: function(value){
+          this.num = value;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
