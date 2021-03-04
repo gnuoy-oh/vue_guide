@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox shadow">
     <!-- input 입력된 텍스트 값을 동적으로 Vue 인스턴스 안에 mapping -->
-    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
+    <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo" />
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn"></i>
     </span>
@@ -9,57 +9,58 @@
 </template>
 
 <script>
-  export default {
-    data: function () {
-      return {
-        newTodoItem: ""
-      }
-    },
-    methods: {
-      addTodo: function () {
+export default {
+  data: function() {
+    return {
+      newTodoItem: ""
+    };
+  },
+  methods: {
+    addTodo: function() {
+      // 빈값을 저장하지 않았을 경우에만 실행한다.
+      if (this.newTodoItem !== "") {
+        var obj = { completed: false, item: this.newTodoItem };
         // this === TodoInput Component를 가리킨다.
         // 로컬 스토리지에 저장 - https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage
-        localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
         this.clearInput();
-      },
-      clearInput: function () {
-        this.newTodoItem = '';
       }
+    },
+    clearInput: function() {
+      this.newTodoItem = "";
     }
-
-  };
-
+  }
+};
 </script>
 
 <style scoped>
-  input:focus {
-    outline: none;
-  }
+input:focus {
+  outline: none;
+}
 
-  .inputBox {
-    background-color: #fff;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 5px;
-  }
+.inputBox {
+  background-color: #fff;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 5px;
+}
 
-  .inputBox input {
-    border-style: none;
-    font-size: 0.9rem;
-  }
+.inputBox input {
+  border-style: none;
+  font-size: 0.9rem;
+}
 
-  .addContainer {
-    float: right;
-    background-color: green;
-    display: block;
-    width: 3rem;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-  }
+.addContainer {
+  float: right;
+  background-color: green;
+  display: block;
+  width: 3rem;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
 
-  .addBtn {
-    color: white;
-    vertical-align: middle;
-  }
-
+.addBtn {
+  color: white;
+  vertical-align: middle;
+}
 </style>
