@@ -16,13 +16,13 @@ export default {
     };
   },
   methods: {
+    // input 버튼을 클릭하거나, enter를 하는 순간, addTodo가 동작
+    // emit으로 addTodoItem을 App.vue로 보내준다.
     addTodo: function() {
       // 빈값을 저장하지 않았을 경우에만 실행한다.
       if (this.newTodoItem !== "") {
-        var obj = { completed: false, item: this.newTodoItem };
-        // this === TodoInput Component를 가리킨다.
-        // 로컬 스토리지에 저장 - https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        // addTodoItem 이벤트를 발생 -> App.vue로 올라간다.
+        this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
       }
     },

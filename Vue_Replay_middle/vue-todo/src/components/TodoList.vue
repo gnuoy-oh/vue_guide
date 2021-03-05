@@ -3,7 +3,7 @@
     <ul>
       <!-- (todoItem, index) => 각 item의 (할일 이름, 순서) -->
       <li
-        v-for="(todoItem, index) in todoItems"
+        v-for="(todoItem, index) in propsdata"
         v-bind:key="todoItem.item"
         class="shadow"
       >
@@ -27,40 +27,17 @@
 
 <script>
 export default {
-  data: function() {
-    return {
-      todoItems: []
-    };
-  },
-  // LifeCycle -> 인스턴스가 생성되자마자 하위 로직이 실행되는 훅 (로직이 호출된다)
-  created: function() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          // localStorage의 value가 떨어진다.
-          // localStorage.getItem(localStorage.key(i));
-          // JSON.parse === string된 리스트를 객체(Object)로 가져오기 위한 변환 방법
-          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-      }
-    }
-  },
+  props: ["propsdata"],
   methods: {
+    // remove 버튼을 클릭했을 때, removeTodo 함수가 실행되고,
+    // App.vue로 removeItem 이벤트와 todoItem / index 인자를 전달한다.
     removeTodo: function(todoItem, index) {
-      console.log(todoItem, index);
-      // localStorage.removeItem('key') => localStorage에 해당하는 key를 지운다 (value도 지워짐)
-      localStorage.removeItem(todoItem);
-      // 기존 배열을 지우고 반환한다.
-      this.todoItems.splice(index, 1);
+      this.$emit("removeItem", todoItem, index);
     },
+    // checkbox 버튼을 클릭했을 때, toggleComplete 함수가 실행되고,
+    // App.vue에서 toggleItem 이벤트와 todoItem / index 인자를 전달한다.
     toggleComplete: function(todoItem, index) {
-      todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.completed);
-      // 바뀐 내용을 localStorage에 새로 저장한다.
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit("toggleItem", todoItem, index);
     }
   }
 };
