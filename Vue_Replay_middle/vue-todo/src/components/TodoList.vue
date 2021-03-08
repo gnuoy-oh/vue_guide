@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul">
       <!-- (todoItem, index) => 각 item의 (할일 이름, 순서) -->
       <li
         v-for="(todoItem, index) in propsdata"
@@ -21,7 +21,7 @@
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -82,5 +82,17 @@ li {
   margin-left: auto;
   color: #de4343;
   cursor: pointer;
+}
+
+/* transition effect 추가! */
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
