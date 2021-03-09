@@ -26,7 +26,7 @@
 <script>
 import Modal from "./common/Modal.vue";
 export default {
-  data: function() {
+  data() {
     return {
       newTodoItem: "",
       showModal: false
@@ -35,7 +35,7 @@ export default {
   methods: {
     // input 버튼을 클릭하거나, enter를 하는 순간, addTodo가 동작
     // emit으로 addTodoItem을 App.vue로 보내준다.
-    addTodo: function() {
+    addTodo() {
       // 빈값을 저장하지 않았을 경우에만 실행한다.
       if (this.newTodoItem !== "") {
         // addTodoItem 이벤트를 발생 -> App.vue로 올라간다.
@@ -45,12 +45,12 @@ export default {
         this.showModal = true;
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodoItem = "";
     }
   },
   components: {
-    Modal: Modal
+    Modal
   }
 };
 </script>

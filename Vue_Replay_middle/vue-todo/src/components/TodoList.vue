@@ -31,12 +31,12 @@ export default {
   methods: {
     // remove 버튼을 클릭했을 때, removeTodo 함수가 실행되고,
     // App.vue로 removeItem 이벤트와 todoItem / index 인자를 전달한다.
-    removeTodo: function(todoItem, index) {
+    removeTodo(todoItem, index) {
       this.$emit("removeItem", todoItem, index);
     },
     // checkbox 버튼을 클릭했을 때, toggleComplete 함수가 실행되고,
     // App.vue에서 toggleItem 이벤트와 todoItem / index 인자를 전달한다.
-    toggleComplete: function(todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.$emit("toggleItem", todoItem, index);
     }
   }
