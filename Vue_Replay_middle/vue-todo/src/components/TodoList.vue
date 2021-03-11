@@ -3,7 +3,7 @@
     <transition-group name="list" tag="ul">
       <!-- (todoItem, index) => 각 item의 (할일 이름, 순서) -->
       <li
-        v-for="(todoItem, index) in propsdata"
+        v-for="(todoItem, index) in this.$store.state.todoItems"
         v-bind:key="todoItem.item"
         class="shadow"
       >
@@ -29,15 +29,15 @@
 export default {
   props: ["propsdata"],
   methods: {
-    // remove 버튼을 클릭했을 때, removeTodo 함수가 실행되고,
-    // App.vue로 removeItem 이벤트와 todoItem / index 인자를 전달한다.
     removeTodo(todoItem, index) {
-      this.$emit("removeItem", todoItem, index);
+      // this.$emit("removeItem", todoItem, index);
+      this.$store.commit("removeOneItem", { todoItem, index });
     },
     // checkbox 버튼을 클릭했을 때, toggleComplete 함수가 실행되고,
     // App.vue에서 toggleItem 이벤트와 todoItem / index 인자를 전달한다.
     toggleComplete(todoItem, index) {
-      this.$emit("toggleItem", todoItem, index);
+      // this.$emit("toggleItem", todoItem, index);
+      this.$store.commit("toggleOneItem", { todoItem, index });
     }
   }
 };

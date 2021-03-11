@@ -39,7 +39,7 @@ export default {
       // 빈값을 저장하지 않았을 경우에만 실행한다.
       if (this.newTodoItem !== "") {
         // addTodoItem 이벤트를 발생 -> App.vue로 올라간다.
-        this.$emit("addTodoItem", this.newTodoItem);
+        this.$store.commit("addOneItem", this.newTodoItem);
         this.clearInput();
       } else {
         this.showModal = true;

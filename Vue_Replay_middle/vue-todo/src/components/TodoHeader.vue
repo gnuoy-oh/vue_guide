@@ -1,13 +1,11 @@
 <template>
   <header>
     <h1>TODO It~!</h1>
+    <!-- <h1>{{ this.$store.state.headerText }}</h1> -->
   </header>
 </template>
 
-<script>
-
-</script>
-
+<script></script>
 
 <style scoped>
 /* scoped: 해당 컴포넌트 내에서만 사용한다. */
