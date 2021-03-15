@@ -27,12 +27,18 @@ export const store = new Vuex.Store({
     headerText: "Header Text is Here",
     todoItems: storage.fetch()
   },
+  getters: {
+    storedTodoItems(state) {
+      return state.todoItems;
+    }
+  },
   mutations: {
     addOneItem(state, todoItem) {
       const obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj));
       state.todoItems.push(obj);
     },
+    // 인자를 두 개 이상 받을경우, 임의의 명으로 payload를 자주 사용한다.
     removeOneItem(state, payload) {
       localStorage.removeItem(payload.todoItem.item);
       state.todoItems.splice(payload.index, 1);

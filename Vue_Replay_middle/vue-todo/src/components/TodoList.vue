@@ -3,7 +3,7 @@
     <transition-group name="list" tag="ul">
       <!-- (todoItem, index) => 각 item의 (할일 이름, 순서) -->
       <li
-        v-for="(todoItem, index) in this.$store.state.todoItems"
+        v-for="(todoItem, index) in this.storedTodoItems"
         v-bind:key="todoItem.item"
         class="shadow"
       >
@@ -26,8 +26,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  props: ["propsdata"],
   methods: {
     removeTodo(todoItem, index) {
       // this.$emit("removeItem", todoItem, index);
@@ -39,6 +40,12 @@ export default {
       // this.$emit("toggleItem", todoItem, index);
       this.$store.commit("toggleOneItem", { todoItem, index });
     }
+  },
+  computed: {
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItems;
+    // }
+    ...mapGetters(["storedTodoItems"])
   }
 };
 </script>
