@@ -10,14 +10,14 @@
         <i
           class="checkBtn fas fa-check"
           v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-          v-on:click="toggleComplete(todoItem, index)"
+          v-on:click="toggleComplete({ todoItem, index })"
         ></i>
         <span v-bind:class="{ textCompleted: todoItem.completed }">
           {{ todoItem.item }}
         </span>
 
         <!-- (todoItem, index) =>  -->
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -26,20 +26,28 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      // this.$emit("removeItem", todoItem, index);
-      this.$store.commit("removeOneItem", { todoItem, index });
-    },
+    ...mapMutations({
+      removeTodo: "removeOneItem",
+      toggleComplete: "toggleOneItem"
+    })
+    // Helper 함수는 인자를 선언하지 않아도, 호출하는 곳에서 인자를 넘기면(todoItem, index), 암묵적으로 그 인자를 전달한다. 그치만 위에서는 (todoItem, index) 객체 두 개를 넘기기 때문에, 디스트럭쳐링 형태로 인자 두 개 를 넘겨준다.
+    // 아래 코드 -> 위와 같은 기능이지만 Helper함수를 사용하지 않았음
+    // removeTodo(todoItem, index) {
+    // this.$emit("removeItem", todoItem, index);
+    //   this.$store.commit("removeOneItem", { todoItem, index });
+    // },
+
     // checkbox 버튼을 클릭했을 때, toggleComplete 함수가 실행되고,
     // App.vue에서 toggleItem 이벤트와 todoItem / index 인자를 전달한다.
-    toggleComplete(todoItem, index) {
-      // this.$emit("toggleItem", todoItem, index);
-      this.$store.commit("toggleOneItem", { todoItem, index });
-    }
+    // 아래 코드 -> 위와 같은 기능이지만 Helper함수를 사용하지 않았음
+    // toggleComplete(todoItem, index) {
+    // this.$emit("toggleItem", todoItem, index);
+    // this.$store.commit("toggleOneItem", { todoItem, index });
+    // }
   },
   computed: {
     // todoItems() {
